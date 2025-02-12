@@ -16,19 +16,20 @@ def generate_animal_info(animals_data):
     output = []
 
     for animal in animals_data:
-        name = f"<div class='card__title'>Name: {animal.get('name', 'Unknown')}</div>\n"
-        diet = f"<div class='card__text'>Diet: {animal.get('characteristics', {}).get('diet', 'Unknown')}</div>\n"
+        name = f"<div class='card__title'>Name: {animal.get('common_name', 'Unknown')}</div>\n"
+        diet = f"<div class='card__text'>Diet: {animal.get('diet', 'Unknown')}</div>\n"
         location = f"<div class='card__text'>Location: {animal.get('locations', ['Unknown'])[0]}</div>\n"
-        type_info = f"<div class='card__text'>Type: {animal.get('characteristics', {}).get('type', 'Unknown')}</div>\n"
+        type_info = f"<div class='card__text'>Type: {animal.get('family', 'Unknown')}</div>\n"
 
         animal_info = name + diet + location + type_info
         output.append(f"<li class='cards__item'>{animal_info}</li>\n")
+
 
     return "".join(output)
 
 
 # Load data
-animals_data = load_data('animals_data.json')
+animals_data = load_data('animals_data.json')['animals']
 if not animals_data:
     print("No valid animal data found. Exiting.")
     exit(1)
