@@ -28,27 +28,33 @@ def generate_animal_info(animals_data):
     return "".join(output)
 
 
-# Load data
-animals_data = load_data('animals_data.json')['animals']
-if not animals_data:
-    print("No valid animal data found. Exiting.")
-    exit(1)
+def main():
+    animals_data = load_data('animals_data.json')['animals']
+    if not animals_data:
+        print("No valid animal data found. Exiting.")
+        exit(1)
 
-# Generate animals info
-animals_info = generate_animal_info(animals_data)
+    # Generate animals info
+    animals_info = generate_animal_info(animals_data)
 
-# Read template
-try:
-    with open('animals_template.html', encoding="utf-8") as file:
-        template = file.read()
-except FileNotFoundError:
-    print("Error: Template file 'animals_template.html' not found.")
-    exit(1)
+    # Read template
+    try:
+        with open('animals_template.html', encoding="utf-8") as file:
+            template = file.read()
+    except FileNotFoundError:
+        print("Error: Template file 'animals_template.html' not found.")
+        exit(1)
 
-# Replace placeholder and write new HTML file
-new_html = template.replace('__REPLACE_ANIMALS_INFO__', animals_info)
+    # Replace placeholder and write new HTML file
+    new_html = template.replace('__REPLACE_ANIMALS_INFO__', animals_info)
 
-with open('animals.html', 'w', encoding="utf-8") as file:
-    file.write(new_html)
+    with open('animals.html', 'w', encoding="utf-8") as file:
+        file.write(new_html)
 
-print("HTML file generated successfully: animals.html")
+    print("HTML file generated successfully: animals.html")
+
+
+if __name__ == "__main__":
+    main()
+
+
