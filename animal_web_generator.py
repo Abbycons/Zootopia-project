@@ -66,11 +66,13 @@ def generate_animal_info(animals_data):
         file.write(new_html)
 
     print(f"HTML file generated successfully: {OUTPUT_FILE}")
-    return "".join(output)
+    return "".join(new_html)
 
 # Main execution
 if __name__ == "__main__":
-    animals_data = load_data(DATA_FILE)
+    animals_data = load_data(DATA_FILE)['animals']
     if not animals_data:
         print("No valid animal data found. Exiting.")
         exit(1)
+    else:
+        generate_animal_info(animals_data)
